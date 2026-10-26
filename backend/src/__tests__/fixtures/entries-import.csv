@@ -1,0 +1,11 @@
+Date,Project,Hours,Description
+2024-01-15,Acme Corp,7.5,Sprint planning
+2024-01-16,acme corp,8,"API work, code review"
+2024-01-17,Globex,4,Design review
+
+2024-02-30,Acme Corp,3,Invalid calendar date
+01/18/2024,Acme Corp,2,Wrong date format
+2024-01-19,Acme Corp,0,Zero hours
+2024-01-20,Unknown Project,5,Missing project
+2024-01-21,Globex,6
+2024-01-22,Globex,24.5,Over 24 hours

@@ -177,6 +177,23 @@ Frontend will be running at `http://localhost:5173`
 - `GET /api/work-entries/:id` - Get specific work entry
 - `PUT /api/work-entries/:id` - Update work entry
 - `DELETE /api/work-entries/:id` - Delete work entry
+- `POST /api/entries/import` - Bulk import work entries from a CSV file (see below)
+
+#### Bulk Import (CSV)
+Send `multipart/form-data` with the CSV in the `file` field (max 1 MB, 1000 rows). Header row is required; columns are `date` (YYYY-MM-DD), `project` (an existing client name, case-insensitive), `hours` (> 0, ≤ 24) and optional `description`.
+
+```csv
+date,project,hours,description
+2024-01-15,Acme Corp,7.5,Sprint planning
+2024-01-16,Acme Corp,8,"API work, code review"
+```
+
+Valid rows are imported; invalid rows are skipped. The response summarizes the result, with `line` being the line number in the CSV file:
+
+```json
+{ "message": "Import completed", "imported": 2, "skipped": 1,
+  "errors": [{ "line": 4, "errors": ["\"hours\" must be a positive number"] }] }
+```
 
 ### Reports
 - `GET /api/reports/client/:clientId` - Get hourly report for client
