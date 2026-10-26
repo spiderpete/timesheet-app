@@ -49,13 +49,14 @@ describe('POST /api/entries/import (integration)', () => {
     expect(response.body).toEqual({
       message: 'Import completed',
       imported: 3,
-      skipped: 5,
+      skipped: 6,
       errors: [
         { line: 6, errors: ['"date" must be a valid calendar date'] },
         { line: 7, errors: ['"date" must be in YYYY-MM-DD format'] },
         { line: 8, errors: ['"hours" must be a positive number'] },
         { line: 9, errors: ['Project "Unknown Project" not found'] },
-        { line: 10, errors: ['Expected 4 columns but found 3'] }
+        { line: 10, errors: ['Expected 4 columns but found 3'] },
+        { line: 11, errors: ['"hours" must be less than or equal to 24'] }
       ]
     });
 

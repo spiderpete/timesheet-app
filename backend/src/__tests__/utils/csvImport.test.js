@@ -147,9 +147,15 @@ describe('CSV import utils', () => {
       ['0', '"hours" must be a positive number'],
       ['-2', '"hours" must be a positive number'],
       ['abc', '"hours" must be a number'],
-      ['25', '"hours" must be less than or equal to 24']
+      ['25', '"hours" must be less than or equal to 24'],
+      ['24.01', '"hours" must be less than or equal to 24'],
+      ['100', '"hours" must be less than or equal to 24']
     ])('rejects hours %s', (hours, message) => {
       expect(validateEntryRow(row({ ...valid, hours }))).toEqual({ errors: [message] });
+    });
+
+    test('accepts exactly 24 hours', () => {
+      expect(validateEntryRow(row({ ...valid, hours: '24' })).value.hours).toBe(24);
     });
 
     test('rejects a description over 1000 characters', () => {
